@@ -14,6 +14,7 @@
 package io.reactivex.rxjava3.internal.schedulers;
 
 import io.reactivex.rxjava3.annotations.Experimental;
+import io.reactivex.rxjava3.internal.util.SuppressAnimalSniffer;
 import reactor.blockhound.BlockHound;
 import reactor.blockhound.integration.BlockHoundIntegration;
 
@@ -34,6 +35,7 @@ public final class RxJavaBlockHoundIntegration implements BlockHoundIntegration 
     public void applyTo(BlockHound.Builder builder) {
         builder.nonBlockingThreadPredicate(new Function<Predicate<Thread>, Predicate<Thread>>() {
             @Override
+            @SuppressAnimalSniffer
             public Predicate<Thread> apply(Predicate<Thread> p) {
                 return p.or(new Predicate<Thread>() {
                     @Override
